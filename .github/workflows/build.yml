@@ -19,11 +19,21 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Grant Execute Permission for Gradlew
-        run: chmod +x ./gradlew || true
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Ensure Google Services JSON is in app folder
+        run: |
+          if [ -f google-services.json ]; then
+            cp google-services.json app/
+            echo "Copied google-services.json to app/"
+          fi
+
+      - name: Make Gradlew Executable
+        run: chmod +x ./gradlew
 
       - name: Build Debug APK
-        run: ./gradlew assembleDebug --no-daemon
+        run: ./gradlew assembleDebug --stacktrace
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
