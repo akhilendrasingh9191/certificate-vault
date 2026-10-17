@@ -1,0 +1,6 @@
+{
+  "name": "CertVault",
+  "description": "Organize certificates, achievements, and credentials with structured details and export professional PDF portfolios.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,146 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile information for displaying on exported certificate dossiers and portfolios",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The UID of the user from Firebase Auth"
+        },
+        "fullName": {
+          "type": "string",
+          "description": "Full name of the user"
+        },
+        "titleOrProfession": {
+          "type": "string",
+          "description": "Professional title or headline"
+        },
+        "email": {
+          "type": "string",
+          "description": "Contact email address"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Optional contact phone number"
+        },
+        "summary": {
+          "type": "string",
+          "description": "Brief executive summary or career objective"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of creation"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of last update"
+        }
+      },
+      "required": [
+        "userId",
+        "fullName"
+      ]
+    },
+    "Certificate": {
+      "title": "Certificate",
+      "description": "A certificate, credential, license, or achievement record",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The UID of the owning user"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of certificate or achievement"
+        },
+        "organization": {
+          "type": "string",
+          "description": "Issuing institution, platform, or authority"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category such as Certification, Award, Degree, License, Course"
+        },
+        "issueDate": {
+          "type": "string",
+          "description": "Date of issue (e.g. YYYY-MM-DD or formatted date)"
+        },
+        "expiryDate": {
+          "type": "string",
+          "description": "Expiration date or 'No Expiry'"
+        },
+        "credentialId": {
+          "type": "string",
+          "description": "Credential ID, license number, or certificate number"
+        },
+        "credentialUrl": {
+          "type": "string",
+          "description": "Verification link or credential URL"
+        },
+        "description": {
+          "type": "string",
+          "description": "Summary of curriculum, honors, or achievements"
+        },
+        "skills": {
+          "type": "array",
+          "description": "Associated skills, tags, or domains"
+        },
+        "gradeOrScore": {
+          "type": "string",
+          "description": "Score, grade, GPA, or honors classification"
+        },
+        "attachmentName": {
+          "type": "string",
+          "description": "Name of the attached certificate file or document"
+        },
+        "attachmentType": {
+          "type": "string",
+          "description": "MIME type of the attachment, e.g. application/pdf or image/png"
+        },
+        "attachmentPath": {
+          "type": "string",
+          "description": "Internal storage path or URI for the attached document"
+        },
+        "attachmentSize": {
+          "type": "number",
+          "description": "File size of the attachment in bytes"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of creation"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of last update"
+        }
+      },
+      "required": [
+        "userId",
+        "title",
+        "organization",
+        "issueDate"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/UserProfile"
+      },
+      "description": "User profile document containing dossier header info"
+    },
+    "/users/{userId}/certificates/{certificateId}": {
+      "schema": {
+        "$ref": "#/entities/Certificate"
+      },
+      "description": "User's certificates and achievement records"
+    }
+  }
+}
